@@ -1,0 +1,93 @@
+/*body{
+    font-size: 1.125rem;
+    color: #333;
+    margin: 0;
+}
+
+*/
+/* -- Typography---*/
+h1 {
+    font-size: 1.3rem; 
+    color: #212614;
+}
+
+h1 span {
+    color: #b7832f;
+}
+
+h2 {
+    
+    font-size: 1.5rem;
+}
+
+nav ul{
+    list-style: none;
+    text-align: right; 
+}
+
+
+nav a{
+    text-decoration: none;
+    background:#212614;
+    color: ghostwhite;
+    border:burlywood solid 0.5rem;
+    padding: auto 2rem;
+    margin-top: 1rem;
+      
+}
+
+section ul{
+    list-style:none ;
+}
+
+/* Layout    --- */
+
+img{
+    background:plum;
+    width: 20%;
+    border:mediumpurple solid 0.3rem;
+}
+
+
+.container{
+    width: 95%;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.Pcol {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+
+
+.experience ul{
+    list-style: none;
+    padding: 0 1rem;
+}
+
+
+.namenav{
+    display: flex;
+}
+
+.navigation{
+    margin-left: auto;
+    
+}
+body {
+    margin: 24px;
+  }
+  
+  @media (min-width: 400px) {
+    body {
+      background:azure;
+    }
+  }
+  @media (min-width: 550px) {
+    body {
+      background:lemonchiffon;
+    }
+  }
