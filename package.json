@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-
     "start": "nodemon app.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
- 
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +17,7 @@
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^5.0.0",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "eslint": "^9.19.0",
@@ -28,6 +27,7 @@
     "express-session": "^1.18.1",
     "helmet": "^8.0.0",
     "host-csrf": "^1.0.2",
+    "hpp": "^0.2.3",
     "mongoose": "^8.9.5",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
