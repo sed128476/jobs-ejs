@@ -26,7 +26,7 @@ function withEach(target, cb) {
 	})(target);
 }
 
-module.exports =  function has(target, allowDots) {
+export function has(target, allowDots) {
 	const regex = getTestRegex(allowDots);
 
 	let hasProhibited = false;
@@ -94,7 +94,7 @@ function _sanitize(target, options) {
 	};
 }
 
-module.exports = function sanitize(target, options = {}) {
+export function sanitize(target, options = {}) {
 	return _sanitize(target, options).target;
 }
 
@@ -116,7 +116,7 @@ function deepCopy(obj) {
  * @param {{replaceWith?: string, onSanitize?: function, dryRun?: boolean}} options
  * @returns {function}
  */
-module.exports =  function middleware(options = {}) {
+export default function middleware(options = {}) {
 	const hasOnSanitize = typeof options.onSanitize === 'function';
 	return function (req, res, next) {
 		['body', 'params', 'headers'].forEach(function (key) {

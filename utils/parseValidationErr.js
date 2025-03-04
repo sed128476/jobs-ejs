@@ -5,4 +5,4 @@ const parseValidationErrors = (e, req) => {
 	});
 };
 
-module.exports = parseValidationErrors;
+export default parseValidationErrors;

@@ -1,0 +1,36 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
+<a href="/">Home</a>
+<a href="/payments/new">Add a new payment method!</a>
+<hr />
+<table id="payments-table">
+  <tr id="payments-table-header">
+    <th>Card Number</th>
+    <th>Security Code</th>
+    <th>Expiry Date</th>
+    <th>Zip Code</th>
+    <th colspan="2"></th>
+  </tr>
+  <% if (payments && payments.length) { %>
+  <% payments.forEach((payment) => { %>
+  <tr>
+    <td><%= '************' + payment.cardNumber.slice(-4) %></td>
+    <td>***</td>
+    <td><%= payment.expireDate %></td>
+    <td><%= payment.zipCode %></td>
+    <td>
+      <a href="/payments/edit/<%= payment.id %>">
+        <button type="button">edit</button>
+      </a>
+    </td>
+    <td>
+      <form method="POST" action="/payments/delete/<%= payment.id %>">
+        <button>delete</button>
+        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+      </form>
+    </td>
+  </tr>
+  <% }) %>
+  <% } %>
+</table>
+<%- include("partials/footer.ejs") %>

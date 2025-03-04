@@ -1,12 +1,9 @@
-const storeLocals = (req, res, next) => {
-    if (req.user) {
-      res.locals.user = req.user;
-    } else {
-      res.locals.user = null;
-    }
-    res.locals.info = req.flash("info");
-    res.locals.errors = req.flash("error");
-    next();
-  };
-  
-  module.exports = storeLocals;
+import { validStatuses } from '../../models/Job.js';
+
+export default (req, res, next) => {
+	res.locals.user = req.user ? { name: req.user.name } : null;
+	res.locals.info = req.flash('info');
+	res.locals.errors = req.flash('error');
+	res.locals.validStatuses = validStatuses;
+	next();
+};
