@@ -1,10 +1,8 @@
-const  CustomAPIError = require('./custom-api.js');
+import CustomAPIError from './custom-api.js';
 
-class UnauthenticatedError extends CustomAPIError {
+export default class UnauthenticatedError extends CustomAPIError {
 	constructor(message) {
 		super(message);
 		this.statusCode = 401;
 	}
 }
-
-module.exports = { UnauthenticatedError, CustomAPIError, };

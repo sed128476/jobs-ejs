@@ -1,0 +1,56 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
+<% if (payment) { %>
+<form method="POST" action="/payments/update/<%= payment.id %>">
+  <div>
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" name="cardNumber" value="<%= payment.cardNumber %>" maxlength="16" required />
+  </div>
+  <div>
+    <label for="securityCode">Security Code:</label>
+    <input type="text" name="securityCode" value="<%= payment.securityCode %>" maxlength="3" required />
+  </div>
+  <div>
+    <label for="expireDate">Expiry Date (MMYY):</label>
+    <input type="text" name="expireDate" value="<%= payment.expireDate %>" maxlength="4" required />
+  </div>
+  <div>
+    <label for="zipCode">Zip Code:</label>
+    <input type="text" name="zipCode" value="<%= payment.zipCode %>" maxlength="5" required />
+  </div>
+  <div>
+    <button>Edit Payment Method</button>
+    <a href="/payments">
+      <button type="button">Cancel</button>
+    </a>
+  </div>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+<% } else { %>
+<form method="POST" action="/payments">
+  <div>
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" name="cardNumber" maxlength="16" required />
+  </div>
+  <div>
+    <label for="securityCode">Security Code:</label>
+    <input type="text" name="securityCode" maxlength="3" required />
+  </div>
+  <div>
+    <label for="expireDate">Expiry Date (MMYY):</label>
+    <input type="text" name="expireDate" maxlength="4" required />
+  </div>
+  <div>
+    <label for="zipCode">Zip Code:</label>
+    <input type="text" name="zipCode" maxlength="5" required />
+  </div>
+  <div>
+    <button>Submit Payment Method</button>
+    <a href="/payments">
+      <button type="button">Cancel</button>
+    </a>
+  </div>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+<% } %>
+<%- include("partials/footer.ejs") %>

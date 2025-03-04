@@ -1,4 +1,5 @@
-const  { inHTMLData } = require('xss-filters');
+
+import { inHTMLData } from 'xss-filters';
 
 // https://github.com/jsonmaur/xss-clean/blob/master/src/xss.js
 /**
@@ -6,7 +7,7 @@ const  { inHTMLData } = require('xss-filters');
  * @param {string/object} data - The value to sanitize
  * @return {string/object} The sanitized value
  */
-function clean(data = '') {
+export function clean(data = '') {
 	let isObject = false;
 	if (typeof data === 'object') {
 		data = JSON.stringify(data);
@@ -18,5 +19,3 @@ function clean(data = '') {
 
 	return data;
 }
-
-module.exports = clean;

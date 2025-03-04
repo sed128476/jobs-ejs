@@ -1,49 +1,37 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
-// const jwt = require('jsonwebtoken')
-
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new mongoose.Schema({
-  name:{
-    type:String,
-    require: [true, 'Please provide name'],
-    minlength: 3,
-    maxlength: 50,
-  },
-  email:{
-    type:String,
-    require: [true, 'Please provide email'],
-    match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please provide email',],
+	name: {
+		type: String,
+		required: [true, 'Name required.'],
+		minLength: 3,
+		maxLength: 50
+	},
+	email: {
+		type: String,
+		required: [true, 'Email required.'],
+		match: [
+			/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+			'Email not formatted correctly.'
+		],
+		unique: true
+	},
+	password: {
+		type: String,
+		required: [true, 'Password required.'],
+		minLength: 6
+	}
+});
 
-   unique:true,
-  },
-  password:{
-    type:String,
-    require: [true, 'Please provide password'],
-    minlength: 6,
-  
-  },
-})
+UserSchema.pre('save', async function () {
+	const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS) || 10);
+	this.password = await bcrypt.hash(this.password, salt);
+});
 
-UserSchema.pre('save', async function(){
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt)
-    
-})
-// Comment out the createJWT method as follows:
-/*
-UserSchema.methods.createJWT = function () {
-  return jwt.sign({userId:this._id, name: this.name}, process.env.JWT_SECRET,{expiresIn: process.env.JWT_LIFETIME, 
+UserSchema.methods.comparePassword = async function (password) {
+	const isMatch = await bcrypt.compare(password, this.password);
+	return isMatch;
+};
 
-  })
-}
-*/
-
-UserSchema.methods.comparePassword = async function (canditatePassword) {
-  const isMatch = await bcrypt.compare(canditatePassword, this.password)
-    return isMatch
-  
-  
-}
-module.exports = mongoose.model('User',UserSchema)
-
+export default mongoose.model('User', UserSchema);
